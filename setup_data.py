@@ -14,35 +14,35 @@ class Data(Dataset):
 
         def create_annotations():
             # Create annotations file for train if it doesn't exist
-            if not os.path.exists(img_dir + "/train_annotations.csv"):
-                train_dir = img_dir + '/train'
-                file = img_dir + '/train_annotations.csv'
+            if not os.path.exists(img_dir + "/labels.csv"):
+                file = img_dir + '/labels.csv'
                 try:
                     with open(file, 'w') as file:
-                        for entry in os.listdir(train_dir):
-                            label = entry[-6:-4]
-                            file.write(f"{entry},{label}\n")
-                except FileNotFoundError:
-                    print("The directory does not exist")
-
-            # Create annotations file for test if it doesn't exist
-            if not os.path.exists(img_dir + "/test/test_annotations.csv"):
-                test_dir = img_dir + '/test'
-                file = img_dir + '/test_annotations.csv'
-                try:
-                    with open(file, 'w') as file:
-                        for entry in os.listdir(test_dir):
-                            label = entry[-6:-4]
-                            file.write(f"{entry},{label}\n")
+                        for entry in os.listdir(img_dir + "/fingers"):
+                            if not entry[:2] == "._":
+                                label = entry[-6:-4]
+                                file.write(f"{entry},{label}\n")
                 except FileNotFoundError:
                     print("The directory does not exist")
 
         create_annotations()
-        self.train_annotations = img_dir + "/train_annotations.csv"
-        self.test_annotations = img_dir + "/test_annotations.csv"
+        self.labels = pd.read_csv(img_dir + "/labels.csv")
 
     def __len__(self):
-        return len(self.train_annotations)
+        return len(self.labels)
+
+    def __getitem__(self, idx):
+        img_path = os.path.join(self.img_dir, "fingers/" + self.labels.iloc[idx, 0])
+        print(img_path)
+        image = read_image(img_path)
+        label = self.labels.iloc[idx, 1]
+        if self.transform:
+            image = self.transform(image)
+        if self.target_transform:
+            label = self.target_transform(label)
+        return image, label
+
+
 
 
 
