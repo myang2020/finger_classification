@@ -1,6 +1,6 @@
 # Fingers Dataset - PyTorch CNN Implementation
 
-![Fingers Dataset](./sample_images.png)
+<img src="./sample_images.png" width="200px" height="250px">
 
 This repository contains the code for a 2D Convolutional Neural Network (CNN) designed using PyTorch that classifies images of fingers indicating different numbers from 0 to 5 for both left and right hands.
 
