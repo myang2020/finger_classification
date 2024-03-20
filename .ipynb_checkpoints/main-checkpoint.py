@@ -34,6 +34,20 @@ def main():
         trainer.test()
     print("Done!")
 
+    # Check if data mapped correcly
+    # for X, y in test_dataloader:
+    #     print(f"Shape of X [N, C, H, W]: {X.shape}")
+    #     print(y)
+    #     break
+    # for i in range(1, cols * rows + 1):
+    #     sample_idx = torch.randint(len(train_dataset), size=(1,)).item()
+    #     img, label = train_dataset[sample_idx]
+    #     figure.add_subplot(rows, cols, i)
+    #     plt.title(label)
+    #     plt.axis("off")
+    #     plt.imshow(img.squeeze(), cmap="gray")
+    # plt.show()
+
 
 if __name__ == "__main__":
     main()

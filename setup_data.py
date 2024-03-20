@@ -33,7 +33,6 @@ class Data(Dataset):
 
     def __getitem__(self, idx):
         img_path = os.path.join(self.img_dir, "fingers/" + self.labels.iloc[idx, 0])
-        print(img_path)
         image = read_image(img_path)
         label = self.labels.iloc[idx, 1]
         if self.transform:
