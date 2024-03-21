@@ -24,9 +24,10 @@ The code transforms the labels such that it follows this table:
 | **10**          | Right |      4       |
 | **11**          | Right |      5       |
 
-
 You can download the dataset from Kaggle at the following link:
 [Fingers Dataset on Kaggle](https://www.kaggle.com/datasets/koryakinp/fingers/data)
+
+**I combined the train and test images into one folder for randomization of train/test split. Please do the same if you want to run the code locally**
 
 ## Network Architecture
 
@@ -44,7 +45,7 @@ The `trainer.py` script handles the training and evaluation of the model. The mo
 
 ## Results
 
-The model achieves a 100% accuracy rate on the test dataset, indicating that it can perfectly classify the number of fingers shown in the images.
+The model achieves a 99.8% accuracy rate on the test dataset with just 1 epoch.
 
 ## Usage
 
@@ -56,5 +57,3 @@ For more details on how to use this code, please refer to the individual scripts
 - `setup_data.py`: Prepares the data for training and testing.
 - `main.py`: The main script to start the training process.
 - `trainer.py`: Defines the training and evaluation routines.
-
-Feel free to fork this repository and adapt the code to your own projects!
