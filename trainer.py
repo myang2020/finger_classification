@@ -1,12 +1,10 @@
-from setup_data import Data
 import torch
-from network import Network
 from torch import nn
 
 
 class Trainer:
 
-    def __init__(self, train_dataloader, test_dataloader):
+    def __init__(self, train_dataloader, test_dataloader, network):
         self.train_dataloader = train_dataloader
         self.test_dataloader = test_dataloader
         self.device = (
@@ -16,7 +14,7 @@ class Trainer:
             if torch.backends.mps.is_available()
             else "cpu"
         )
-        self.model = Network().to(self.device)
+        self.model = network.to(self.device)
         self.loss_fn = nn.CrossEntropyLoss()
         self.optimizer = torch.optim.SGD(self.model.parameters(), lr=1e-3)
 
@@ -54,3 +52,7 @@ class Trainer:
         test_loss /= num_batches
         correct /= size
         print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
+
+    def save(self):
+        torch.save(self.model.state_dict(), "model.pth")
+        print("Saved PyTorch Model State to model.pth")

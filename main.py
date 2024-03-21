@@ -3,8 +3,8 @@ import torch
 import matplotlib.pyplot as plt
 import os
 from torch.utils.data import DataLoader
-from torchvision.transforms import ToTensor
 from trainer import Trainer
+from network import Network
 
 
 def main():
@@ -26,13 +26,50 @@ def main():
     # Create data loaders.
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size)
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size)
-    trainer = Trainer(train_dataloader, test_dataloader)
-    epochs = 5
+    model = Network()
+    trainer = Trainer(train_dataloader, test_dataloader, model)
+    epochs = 1
     for t in range(epochs):
         print(f"Epoch {t+1}\n-------------------------------")
         trainer.train()
         trainer.test()
     print("Done!")
+
+    trainer.save()
+
+    device = (
+        "cuda"
+        if torch.cuda.is_available()
+        else "mps"
+        if torch.backends.mps.is_available()
+        else "cpu"
+    )
+    model = Network().to(device)
+    model.load_state_dict(torch.load("model.pth"))
+
+    classes = [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+    ]
+
+    model.eval()
+    x, y = test_dataset[0][0], test_dataset[0][1]
+    with torch.no_grad():
+        x = x.to(device)
+        x = x.unsqueeze(0).float()
+        pred = model(x)
+        predicted, actual = classes[pred[0].argmax(0)], classes[y]
+        print(f'Predicted: "{predicted}", Actual: "{actual}"')
 
 
 if __name__ == "__main__":

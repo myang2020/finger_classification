@@ -1,6 +1,7 @@
 from torch import nn
 import torch.nn.functional as F
 
+
 class Network(nn.Module):
     def __init__(self):
         super().__init__()
@@ -11,7 +12,7 @@ class Network(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(2)
         )
-        self.fc = nn.Linear(16384,12)
+        self.fc = nn.Linear(38440, 12)
 
     def forward(self, x):
         x = self.cnn1(x)
@@ -19,4 +20,3 @@ class Network(nn.Module):
         x = self.fc(x)
         output = F.log_softmax(x, dim=1)
         return output
-

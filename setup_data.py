@@ -1,5 +1,3 @@
-import torch
-from torchvision.transforms import ToTensor
 from torchvision.io import read_image
 from torch.utils.data import Dataset
 
@@ -40,11 +38,3 @@ class Data(Dataset):
         if self.target_transform:
             label = self.target_transform(label)
         return image, label
-
-
-
-
-
-
-
-
