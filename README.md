@@ -27,7 +27,7 @@ The code transforms the labels such that it follows this table:
 You can download the dataset from Kaggle at the following link:
 [Fingers Dataset on Kaggle](https://www.kaggle.com/datasets/koryakinp/fingers/data)
 
-**I combined the train and test images into one folder for randomization of train/test split. Please do the same if you want to run the code locally**
+**I combined the train and test images into one folder called 'fingers' for randomization of train/test split. Please do the same and change the root directory in 'main.py' to your local path if you want to run the code locally.**
 
 ## Network Architecture
 
