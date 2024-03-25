@@ -37,7 +37,7 @@ def main():
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size)
     model = Network()
     trainer = Trainer(train_dataloader, test_dataloader, model)
-    epochs = 1
+    epochs = 3
     for t in range(epochs):
         print(f"Epoch {t+1}\n-------------------------------")
         trainer.train()
