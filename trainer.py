@@ -24,8 +24,9 @@ class Trainer:
         for batch, (X, y) in enumerate(self.train_dataloader):
             X, y = X.to(self.device), y.to(self.device)
             X = torch.Tensor.float(X)
-            # Compute prediction error
+            # Compute softmax probabilities (12 classes)
             pred = self.model(X)
+            # Compute prediction error
             loss = self.loss_fn(pred, y)
 
             # Backpropagation

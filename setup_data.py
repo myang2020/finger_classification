@@ -4,6 +4,7 @@ from torch.utils.data import Dataset
 import pandas as pd
 import os
 
+
 class Data(Dataset):
     def __init__(self, img_dir, transform=None, target_transform=None):
         self.img_dir = img_dir
