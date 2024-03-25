@@ -46,6 +46,7 @@ The `trainer.py` script handles the training and evaluation of the model. The mo
 ## Results
 
 The model achieves a 100% accuracy rate on the test dataset with 3 epochs.
+
 <img src="./results.png" width="200px" height="250px">
 
 ## Usage
